@@ -1,7 +1,7 @@
+package project.pages;
+
 import aquality.selenium.elements.interfaces.IElement;
 import org.openqa.selenium.By;
-
-import java.util.concurrent.TimeoutException;
 
 public abstract class BasePage {
 
@@ -13,5 +13,7 @@ public abstract class BasePage {
         this.pageName = pageName;
     }
 
-    public abstract boolean isPageLoaded() throws TimeoutException;
+    public boolean isPageLoaded(IElement element){
+        return element.state().waitForDisplayed();
+    }
 }

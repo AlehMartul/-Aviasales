@@ -1,33 +1,28 @@
+package project.pages;
 import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.elements.interfaces.IButton;
 import aquality.selenium.elements.interfaces.ILabel;
 import aquality.selenium.elements.interfaces.ITextBox;
-import framework.tools.ReadPropertyTool;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 public class MainPage extends BasePage {
 
-    private static final String RESOURCES_PATH = "src/main/resources/";
-    private static final String NAME = "aviasales.properties";
-    private static final String ENTER_DATE = "//*[text()='%s']";
-    private static final String DEPARTURE_DATE = ReadPropertyTool.getData("departureDate", RESOURCES_PATH, NAME);
-    private static final String SET_DEPARTURE_DATE = String.format(ENTER_DATE, DEPARTURE_DATE);
-    private static final String XPATH_SEARCH_BUTTON = "//button[contains(@class, 'home')]";
+    private static final String ENTER_DATE_FORMAT = "//*[text()='%s']";
+    private static final String A = "a";
+    private static final String XPATH_SEARCH_BUTTON = "//button[contains(@class,'home')]";
     private IButton btnSearchTickets = AqualityServices.getElementFactory()
             .getButton(By.xpath(XPATH_SEARCH_BUTTON), "search tickets button");
     private ITextBox txbDepartureField = AqualityServices.getElementFactory()
-            .getTextBox(By.xpath("//input[@id = 'origin']"), "departure");
+            .getTextBox(By.xpath("//input[@id='origin']"), "departure");
     private ITextBox txbDestinationField = AqualityServices.getElementFactory()
-            .getTextBox(By.xpath("//input[@id = 'destination']"), "destination");
-    private IButton btnDepartureDate = AqualityServices.getElementFactory()
-            .getButton(By.xpath(SET_DEPARTURE_DATE), "date of departure");
+            .getTextBox(By.xpath("//input[@id='destination']"), "destination");
     private IButton btnNoNeedReturn = AqualityServices.getElementFactory()
             .getButton(By.xpath("//button[contains(@class,'cancel-departure')]"), "Not need ticket for return button");
     private ILabel lblOpenBooking = AqualityServices.getElementFactory()
-            .getLabel(By.xpath("//label[@class='of_input_checkbox__label']"), "Open Booking in new window");
+            .getLabel(By.xpath("//label[contains(@class,'of_input_checkbox')]"), "Open Booking in new window");
     private IButton btnCalendar = AqualityServices.getElementFactory()
-            .getButton(By.xpath("//div[@class='trip-duration__field --departure']"), "Calendar");
+            .getButton(By.xpath("//div[contains(@class,'field')and contains(@class,'departure')]"), "Calendar");
 
     public MainPage() {
         super(By.xpath(XPATH_SEARCH_BUTTON), "MainPage");
@@ -53,19 +48,25 @@ public class MainPage extends BasePage {
         btnNoNeedReturn.click();
     }
 
-    public void setDateOfDeparture() {
+    public void setDateOfDeparture(String departureDate) {
         AqualityServices.getLogger().info("Setting departure date");
+        String setDepartureDate = String.format(ENTER_DATE_FORMAT, departureDate);
+        IButton btnDepartureDate = AqualityServices.getElementFactory()
+                .getButton(By.xpath(setDepartureDate), "date of departure");
         btnDepartureDate.click();
     }
 
-    public boolean isDateOfDepartureSet(String date) {
+    public boolean isDateOfDepartureSet(String departureDate) {
         AqualityServices.getLogger().info("Checking the date of departure");
-        return btnDepartureDate.getText().contains(date);
+        String setDepartureDate = String.format(ENTER_DATE_FORMAT, departureDate);
+        IButton btnDepartureDate = AqualityServices.getElementFactory()
+                .getButton(By.xpath(setDepartureDate), "date of departure");
+        return btnDepartureDate.getText().contains(departureDate);
     }
 
     public void clearDepartureField() {
         AqualityServices.getLogger().info("Clearing the departure city field");
-        txbDepartureField.sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+        txbDepartureField.sendKeys(Keys.CONTROL + A + Keys.DELETE);
     }
 
     public void setDeparturePlace(String departureCity) {
@@ -88,8 +89,7 @@ public class MainPage extends BasePage {
         return txbDestinationField.getValue().contains(city);
     }
 
-    @Override
-    public boolean isPageLoaded() {
-        return btnSearchTickets.state().waitForDisplayed();
+    public IButton getBtnSearchTickets(){
+        return btnSearchTickets;
     }
 }

@@ -1,7 +1,6 @@
 package framework.tools;
 
 import aquality.selenium.browser.AqualityServices;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,25 +16,25 @@ public class ReadPropertyTool {
         this.name = name;
     }
 
-    private static void readProperties(String path, String name) {
+    private void readProperties() {
         if (properties == null) {
             properties = new Properties();
         }
         try {
-            properties.load(new FileReader(new File(path, name)));
+            properties.load(new FileReader(new File(resourcesPath, name)));
         } catch (IOException ex) {
             AqualityServices.getLogger().error(ex.getMessage());
         }
     }
 
-    public static String getData(String data, String path, String name) {
-        initializeProperties(path, name);
+    public String getProperty(String data) {
+        initializeProperties();
         return properties.getProperty(data);
     }
 
-    private static void initializeProperties(String path, String name) {
+    private void initializeProperties() {
         if (properties == null) {
-            readProperties(path, name);
+            readProperties();
         }
     }
 }
