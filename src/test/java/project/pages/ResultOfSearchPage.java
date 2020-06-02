@@ -28,10 +28,6 @@ public class ResultOfSearchPage extends BasePage {
         super(By.xpath(XPATH_OF_SCHEDULE), "MainPage");
     }
 
-    public String getXpathOfDurations (){
-        return XPATH_OF_DURATIONS;
-    }
-
     public boolean isPageLoaded() {
         AqualityServices.getConditionalWait().waitFor(() -> schedule.state().waitForDisplayed(),
                 Duration.ofSeconds(Integer.parseInt(TIMEOUT)), Duration.ofMillis(Integer.parseInt(POLLING_INTERVAL)),

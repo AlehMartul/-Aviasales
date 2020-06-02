@@ -9,7 +9,7 @@ import org.openqa.selenium.Keys;
 public class MainPage extends BasePage {
 
     private static final String ENTER_DATE_FORMAT = "//*[text()='%s']";
-    private static final String A = "a";
+    private static final String KEY_A = "a";
     private static final String XPATH_SEARCH_BUTTON = "//button[contains(@class,'home')]";
     private IButton btnSearchTickets = AqualityServices.getElementFactory()
             .getButton(By.xpath(XPATH_SEARCH_BUTTON), "search tickets button");
@@ -66,7 +66,7 @@ public class MainPage extends BasePage {
 
     public void clearDepartureField() {
         AqualityServices.getLogger().info("Clearing the departure city field");
-        txbDepartureField.sendKeys(Keys.CONTROL + A + Keys.DELETE);
+        txbDepartureField.sendKeys(Keys.CONTROL + KEY_A + Keys.DELETE);
     }
 
     public void setDeparturePlace(String departureCity) {
@@ -89,7 +89,7 @@ public class MainPage extends BasePage {
         return txbDestinationField.getValue().contains(city);
     }
 
-    public IButton getBtnSearchTickets(){
-        return btnSearchTickets;
-    }
+    //public IButton getBtnSearchTickets(){
+    //    return btnSearchTickets;
+    //}
 }

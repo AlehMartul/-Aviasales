@@ -7,7 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import project.pages.MainPage;
 import project.pages.ResultOfSearchPage;
-import project.steps.Steps;
+import project.steps.FindTicketsSteps;
 
 public class AviasalesTest extends BaseTest {
 
@@ -20,7 +20,7 @@ public class AviasalesTest extends BaseTest {
             throws NumberFormatException {
         AqualityServices.getLogger().info("Step one - open aviasales page");
         MainPage mainPage = new MainPage();
-        Assert.assertTrue(mainPage.isPageLoaded(mainPage.getBtnSearchTickets()), "Main page didn't load");
+        Assert.assertTrue(mainPage.isPageLoaded(), "Main page didn't load");
 
         AqualityServices.getLogger().info("Step two - set date and city of flight");
         mainPage.clearDepartureField();
@@ -38,6 +38,6 @@ public class AviasalesTest extends BaseTest {
         AqualityServices.getLogger().info("Step three - looking for faster flight");
         ResultOfSearchPage resultOfSearchPage = new ResultOfSearchPage();
         Assert.assertTrue(resultOfSearchPage.isPageLoaded());
-        new Steps().findFaster(FORMAT_OF_DURATION);
+        new FindTicketsSteps().findFaster(FORMAT_OF_DURATION);
     }
 }

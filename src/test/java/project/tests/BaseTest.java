@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 public abstract class BaseTest {
 
     public static final String RESOURCES_PATH = "src/main/resources/";
-    public static final String AVIASALES_PROPERTIES = "aviasales.properties";
+    public static final String AVIASALES_PROPERTIES = "config.properties";
     private static final String MAIN_URL = new ReadPropertyTool(BaseTest.RESOURCES_PATH, BaseTest.AVIASALES_PROPERTIES)
             .getProperty("mainUrl");
 
@@ -28,7 +28,7 @@ public abstract class BaseTest {
         }
     }
 
-    protected Browser getBrowser() {
+    private Browser getBrowser() {
         return AqualityServices.getBrowser();
     }
 }

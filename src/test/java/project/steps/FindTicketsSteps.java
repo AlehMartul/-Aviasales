@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Steps {
+public class FindTicketsSteps {
 
     private DateTimeFormatter customDateTimeFormatter = DateTimeFormat.forPattern("HH.mm");
 

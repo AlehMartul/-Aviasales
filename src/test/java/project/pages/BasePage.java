@@ -1,5 +1,6 @@
 package project.pages;
 
+import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.elements.interfaces.IElement;
 import org.openqa.selenium.By;
 
@@ -13,7 +14,9 @@ public abstract class BasePage {
         this.pageName = pageName;
     }
 
-    public boolean isPageLoaded(IElement element){
-        return element.state().waitForDisplayed();
+    public boolean isPageLoaded(){
+        return AqualityServices.getElementFactory().getLabel(this.locator, this.pageName).state().waitForDisplayed();
+
+
     }
 }
