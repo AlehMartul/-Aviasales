@@ -1,0 +1,10 @@
+<suite name="suite">
+    <test name="testSearchFlightByParameters">
+        <parameter name="departureCity"  value="Минск" />
+        <parameter name="destinationCity"  value="Санкт-Петербург" />
+        <parameter name="departureDate"  value="29" />
+        <classes>
+            <class name="project.tests.AviasalesTest" />
+        </classes>
+    </test>
+</suite>
